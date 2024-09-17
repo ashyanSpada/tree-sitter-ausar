@@ -41,7 +41,7 @@
     {
       "scope": "source.ausar",
       "injection-regex": "^ausar$",
-      "file-ttypes": [
+      "file-types": [
         "ausar"
       ],
       "highlights": "queries/highlights.scm"

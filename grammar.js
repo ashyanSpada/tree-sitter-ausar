@@ -134,6 +134,9 @@ module.exports = grammar({
         assign_op: _ => choice(
             '=', '+=', '-=', '*=', '/=', '%='
         ),
+        postfix_op: _ => choice(
+            '--', '++'
+        ),
         VariableDecl: $ => seq(
             $.Identifier,
             ':=',
@@ -151,10 +154,15 @@ module.exports = grammar({
             ':',
             $.Expression,
         ),
+        PostfixStmt: $ => seq(
+            $.Expression,
+            $.postfix_op,
+        ),
         SimpleStmt: $ => choice(
             $.VariableDecl,
             $.AssignStmt,
             $.TernaryStmt,
+            $.PostfixStmt,
             $.Expression,
         ),
         IfStmt: $ => seq(

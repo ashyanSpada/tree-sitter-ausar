@@ -359,6 +359,25 @@
     }
   },
   {
+    "type": "PostfixStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "Expression",
+          "named": true
+        },
+        {
+          "type": "postfix_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "PrimaryExpr",
     "named": true,
     "fields": {},
@@ -437,6 +456,10 @@
         },
         {
           "type": "Expression",
+          "named": true
+        },
+        {
+          "type": "PostfixStmt",
           "named": true
         },
         {
@@ -599,6 +622,11 @@
     "fields": {}
   },
   {
+    "type": "postfix_op",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "rel_op",
     "named": true,
     "fields": {}
@@ -672,6 +700,10 @@
     "named": false
   },
   {
+    "type": "++",
+    "named": false
+  },
+  {
     "type": "+=",
     "named": false
   },
@@ -681,6 +713,10 @@
   },
   {
     "type": "-",
+    "named": false
+  },
+  {
+    "type": "--",
     "named": false
   },
   {

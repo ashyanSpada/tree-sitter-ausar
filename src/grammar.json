@@ -608,6 +608,19 @@
         }
       ]
     },
+    "postfix_op": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "--"
+        },
+        {
+          "type": "STRING",
+          "value": "++"
+        }
+      ]
+    },
     "VariableDecl": {
       "type": "SEQ",
       "members": [
@@ -667,6 +680,19 @@
         }
       ]
     },
+    "PostfixStmt": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "Expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "postfix_op"
+        }
+      ]
+    },
     "SimpleStmt": {
       "type": "CHOICE",
       "members": [
@@ -681,6 +707,10 @@
         {
           "type": "SYMBOL",
           "name": "TernaryStmt"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "PostfixStmt"
         },
         {
           "type": "SYMBOL",
