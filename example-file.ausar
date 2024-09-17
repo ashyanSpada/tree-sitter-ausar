@@ -1,0 +1,50 @@
+package test;
+
+import (
+	"math"
+)
+
+tom := {
+    "name": "tom",
+    "height": "1.8",
+    "weight": "70"
+};
+
+jerry := {
+    "name": "jerry",
+    "height": "1.75",
+    "weight": "65"
+};
+
+func bmi(a) {
+    return a.weight/(a.height*a.height);
+} 
+
+func whoIsHigher(a, b) {
+    if a.height > b.height {
+        return a.name;
+    };
+    return b.name;
+}
+
+func whoIsHeavier(a, b) {
+    if a.weight > b.weight {
+        return a.name;
+    };
+    return b.name;
+}
+
+func whoIsHealthier(a, b) {
+    if bmi(a) < bmi(b) {
+        return a.name;
+    };
+    return b.name;
+}
+
+func main() {
+    list := [whoIsHealthier(tom,jerry), whoIsHeavier(tom, jerry),whoIsHigher(jerry,tom)];
+    a := list[0];
+    b := list[1];
+    c := list[2];
+    return a,b,c,list[0:2];
+}

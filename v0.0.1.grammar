@@ -1,0 +1,71 @@
+Bool -> 'true' | 'false' | 'True' | 'False'
+
+String -> [^"([^"\\\\]*|\\\\["\\\\bfnrt\/]|\\\\u[0-9a-f]{4})*"]
+
+Number -> [-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?]
+
+Literal -> Bool | String | Number
+
+Identifier -> [^[a-zA-Z][a-zA-Z_0-9]*]
+
+List -> '[' (Expression ',')* Expression ']' | '[' ']'
+
+Map -> '{' (Expression ':' Expression ',')* Expression '}' | '{' '}'
+
+Group -> '(' Expression ')'
+
+Operand -> Literal | Identifier | List | Map | Group
+
+Selector -> '.' Identifier
+
+Index -> '[' Expression ']'
+
+Slice -> '[' Expression? : Expression? ']'
+
+Arguments -> '(' (Expression ',')* Expression ')' | '(' ')'
+
+PrimaryExpr -> Operand | PrimaryExpr Selector | PrimaryExpr Index | PrimaryExpr Slice | PrimaryExpr Arguments
+
+Expression -> UnaryExpr | Expression binary_op Expression
+
+UnaryExpr -> unary_op PrimaryExpr | PrimaryExpr
+
+binary_op  -> '||' | '&&' | rel_op | add_op | mul_op
+
+rel_op     -> '==' | '!=' | '<' | '<=' | '>' | '>='
+
+add_op     -> '+' | '-' | '|' | '^'
+
+mul_op     -> '*' | '/' | '%' | '<<' | '>>' | '&' | '&^'
+
+unary_op   -> '+' | '-' | '!' | '^' | '*' | '&' | '<-'
+
+VariableDecl -> Identifier ':=' Expression
+
+AssignStmt -> Identifier assign_op Expression
+
+assign_op -> '=' | '+=' | '-=' | '*=' | '/=' | '%='
+
+TernaryStmt -> Expression '?' Expression ':' Expression
+
+SimpleStmt -> VariableDecl | AssignStmt | TernaryStmt | Expression
+
+IfStmt -> 'if' Expression Block ( 'else' ( IfStmt | Block ) )?
+
+ReturnStmt -> 'return' (Expression ',')* Expression
+
+ForStmt -> 'for' Identifier ',' Identifier ':=' 'range' Expression Block
+
+Stmt -> IfStmt | ReturnStmt | ForStmt | SimpleStmt
+
+Block -> '{' Stmt* '}'
+
+FunctionDecl -> 'func' Identifier Arguments Block
+
+Formula -> 'formula' Identifier Block
+
+VariableDeclInFile -> VariableDecl ';'
+
+Declare -> FunctionDecl | Formula | VariableDeclInFile
+
+File -> Declare*
