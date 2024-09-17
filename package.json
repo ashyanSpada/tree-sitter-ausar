@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-ausar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Ausar grammar for tree-sitter",
   "license": "MIT",
   "author": "Ausar <ashyan_spada@outlook.com>",
